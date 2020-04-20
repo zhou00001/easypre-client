@@ -36,4 +36,3 @@ build/tmp/
 build/reports/
 build/test-results/
 src/main/resources/
-!/gradle.properties
