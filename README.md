@@ -1,2 +1,2 @@
 # easypre-client
-easypre.com client
+This is EasyPre's client!
