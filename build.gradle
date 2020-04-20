@@ -25,7 +25,6 @@ dependencies {
     compile group: 'com.github.rholder', name: 'guava-retrying', version: '2.0.0'
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.30'
     compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.30'
-    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.13.1'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.3'
     compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.10.3'
 
