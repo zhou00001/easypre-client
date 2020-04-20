@@ -33,3 +33,6 @@ build/libs/easypre-client-1.0.0-SNAPSHOT.jar.asc
 build/publications/
 build/resources/
 build/tmp/
+build/reports/
+build/test-results/
+src/main/resources/
