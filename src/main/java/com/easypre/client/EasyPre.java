@@ -42,7 +42,7 @@ public class EasyPre {
 		if (!config.isConfigAll()) {
 			throw new EasyPreException("EasyPre配置不完整，请检查配置[" + JsonUtil.beanToJsonStr(config) + "]");
 		}
-		System.setProperty("log4j.configurationFile", "log4j2.xml");
+//		System.setProperty("log4j.configurationFile", "log4j2.xml");
 		EasyPre.config = config;
 		EasyPreTimer.init(config);
 	}
