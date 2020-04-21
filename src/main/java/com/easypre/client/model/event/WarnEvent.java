@@ -3,9 +3,9 @@ package com.easypre.client.model.event;
 import com.easypre.client.util.EncryptUtil;
 
 /**
- * 事件
+ * 通用事件
  *
- * @author zhoudecai
+ * @author zhoudc
  * @version 1.0
  * @since 1.0
  */

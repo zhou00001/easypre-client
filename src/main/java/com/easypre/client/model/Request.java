@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * 请求类
- * @author zhoudecai
+ * @author zhoudc
  * @version 1.0
  * @since 1.0
  */
@@ -16,11 +16,11 @@ public class Request<T extends BaseEvent> {
 	private String appKey;
 	/** 时间戳 */
 	private Long timestamp;
-	/** 应用密钥 */
+	/** 请求签名 */
 	private String sign;
-	/** 事件环境 */
+	/** 所在环境 */
 	private String env;
-	/** 事件日志 */
+	/** 事件 */
 	private List<T> eventLogs;
 
 	public Integer getType() {

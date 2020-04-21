@@ -6,7 +6,8 @@ import com.easypre.client.model.event.BaseEvent;
 import java.util.List;
 
 /**
- * @author zhoudecai
+ * 请求构建类
+ * @author zhoudc
  * @version 1.0
  * @since 1.0
  */

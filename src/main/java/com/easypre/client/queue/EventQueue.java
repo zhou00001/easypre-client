@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @author zhoudecai
+ * @author zhoudc
  * @version 1.0
  * @since 1.0
  */
