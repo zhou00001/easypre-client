@@ -9,7 +9,7 @@ import com.easypre.client.util.EncryptUtil;
  * @version 1.0
  * @since 1.0
  */
-public class WarnEvent extends BaseEvent {
+public class NormalEvent extends BaseEvent {
 	/**
 	 * 事件标题
 	 */
@@ -46,7 +46,7 @@ public class WarnEvent extends BaseEvent {
 
 	@Override
 	public String toString() {
-		return "WarnEvent{" +
+		return "NormalEvent{" +
 				"title='" + title + '\'' +
 				", content='" + content + '\'' +
 				"} " + super.toString();

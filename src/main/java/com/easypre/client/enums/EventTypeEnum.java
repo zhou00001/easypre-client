@@ -8,6 +8,7 @@ package com.easypre.client.enums;
  */
 public enum EventTypeEnum {
 	WARN(13601,"预警"),
+	TEMPLATE(13602,"模板"),
 	;
 	/** 编码 */
 	private Integer code;

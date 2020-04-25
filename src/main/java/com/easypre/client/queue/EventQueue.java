@@ -1,5 +1,6 @@
 package com.easypre.client.queue;
 
+import com.easypre.client.enums.EventTypeEnum;
 import com.easypre.client.model.event.BaseEvent;
 import com.google.common.collect.Lists;
 
@@ -22,10 +23,10 @@ public class EventQueue {
 	 * @return
 	 */
 	public static boolean queue(BaseEvent event) {
-		String sign = event.getSign();
-		List<BaseEvent> baseEvents = eventMap.getOrDefault(sign, Lists.newArrayList());
+		String key = String.format("%s_%s",event.getType(),event.getSign());
+		List<BaseEvent> baseEvents = eventMap.getOrDefault(key, Lists.newArrayList());
 		baseEvents.add(event);
-		eventMap.put(sign, baseEvents);
+		eventMap.put(key, baseEvents);
 		return true;
 	}
 
@@ -40,10 +41,17 @@ public class EventQueue {
 		}
 		List<BaseEvent> baseEvents = Lists.newArrayList();
 		for (Map.Entry<String, List<BaseEvent>> entry : eventMap.entrySet()) {
-			if (entry.getValue() != null && entry.getValue().size() > 0) {
+			if (entry.getValue() != null
+					&& entry.getValue().size() > 0
+					&& EventTypeEnum.WARN.getCode().equals(entry.getValue().get(0).getType())) {
+				// 预警，进行合并处理
 				BaseEvent baseEvent = entry.getValue().get(0);
 				baseEvent.setCount(entry.getValue().size());
 				baseEvents.add(baseEvent);
+			}else if (entry.getValue() != null
+					&& entry.getValue().size() > 0){
+				// 非预警，按序发送
+				baseEvents.addAll(entry.getValue());
 			}
 		}
 		eventMap.clear();
