@@ -16,7 +16,7 @@ public class RequestBuilder<T extends BaseEvent> {
 
 	public RequestBuilder() {
 		this.request = new Request<>();
-		this.request.setType(EventTypeEnum.WARN.getCode());
+		this.request.setType(EventTypeEnum.NORMAL_EVENT.getCode());
 	}
 	public RequestBuilder<T> type(EventTypeEnum eventTypeEnum){
 		request.setType(eventTypeEnum.getCode());

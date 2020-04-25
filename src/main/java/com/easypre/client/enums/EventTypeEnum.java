@@ -7,8 +7,10 @@ package com.easypre.client.enums;
  * @since 1.0
  */
 public enum EventTypeEnum {
-	WARN(13601,"预警"),
-	TEMPLATE(13602,"模板"),
+	/** 普通事件 */
+	NORMAL_EVENT(13601,"普通事件"),
+	/** 模板事件 */
+	TEMPLATE_EVENT(13602,"模板事件"),
 	;
 	/** 编码 */
 	private Integer code;

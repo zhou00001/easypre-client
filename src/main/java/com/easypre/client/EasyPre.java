@@ -44,21 +44,30 @@ public class EasyPre {
 		if (!config.isConfigAll()) {
 			throw new EasyPreException("EasyPre配置不完整，请检查配置[" + JsonUtil.beanToJsonStr(config) + "]");
 		}
-//		System.setProperty("log4j.configurationFile", "log4j2.xml");
 		EasyPre.config = config;
 		EasyPreTimer.init(config);
 	}
-
 	/**
 	 * 模板事件
-	 * @param tag
-	 * @param params
+	 *
+	 * @param tag    标签
+	 * @param params 模板参数
 	 */
-	public static void eventTemplate(String tag, Map<String,Object> params){
+	public static void eventTemplate(String tag, Map<String, Object> params) {
+		event(tag,null,params);
+	}
+	/**
+	 * 模板事件
+	 *
+	 * @param tag    标签
+	 * @param to     接收人
+	 * @param params 模板参数
+	 */
+	public static void eventTemplate(String tag, String to, Map<String, Object> params) {
 		if (!checkConfig()) {
 			throw new EasyPreException("EasyPre尚未配置，请检查");
 		}
-		BaseEvent event = buildEvent(tag, params);
+		BaseEvent event = buildEvent(tag, to, params);
 		EventQueue.queue(event);
 	}
 	/**
@@ -68,11 +77,22 @@ public class EasyPre {
 	 * @param content 内容
 	 * @param params  参数
 	 */
-	public static void eventTag(String tag, String content, final Object... params) {
+	public static void eventTag(String tag, String content, final Object... params){
+		eventTag(tag,null,content,params);
+	}
+	/**
+	 * 普通事件
+	 *
+	 * @param tag     标签
+	 * @param to      接收人
+	 * @param content 内容
+	 * @param params  参数
+	 */
+	public static void eventTag(String tag, String to, String content, final Object... params) {
 		if (!checkConfig()) {
 			throw new EasyPreException("EasyPre尚未配置，请检查");
 		}
-		BaseEvent event = buildEvent(tag,content, params);
+		BaseEvent event = buildEvent(tag, to, content, params);
 		EventQueue.queue(event);
 	}
 
@@ -83,22 +103,9 @@ public class EasyPre {
 	 * @param params  参数
 	 */
 	public static void event(String content, final Object... params) {
-		eventTag(null,content,params);
+		eventTag(null, null, content, params);
 	}
 
-	/**
-	 * 标签
-	 */
-	public static void tag(){
-
-	}
-
-	/**
-	 * 事务
-	 */
-	public static void trans(){
-
-	}
 	/**
 	 * 构建模板事件
 	 *
@@ -106,15 +113,17 @@ public class EasyPre {
 	 * @param params
 	 * @return
 	 */
-	private static BaseEvent buildEvent(String tag, Map<String,Object> params) {
+	private static BaseEvent buildEvent(String tag, String to, Map<String, Object> params) {
 		TemplateEvent eventWarn = new TemplateEvent();
 		eventWarn.setSign(tag);
-		eventWarn.setType(EventTypeEnum.TEMPLATE.getCode());
+		eventWarn.setType(EventTypeEnum.TEMPLATE_EVENT.getCode());
+		eventWarn.setTo(to);
 		eventWarn.setParams(params);
 		eventWarn.setOrigTime(LocalDateTime.now());
 		eventWarn.setCount(1);
 		return eventWarn;
 	}
+
 	/**
 	 * 构建普通事件
 	 *
@@ -123,17 +132,19 @@ public class EasyPre {
 	 * @param params
 	 * @return
 	 */
-	private static BaseEvent buildEvent(String tag, String content, final Object... params) {
+	private static BaseEvent buildEvent(String tag, String to, String content, final Object... params) {
 		FormattingTuple formattingTuple = MessageFormatter.arrayFormat(content, params);
 		NormalEvent eventWarn = new NormalEvent();
 		eventWarn.setSign(tag);
-		eventWarn.setType(EventTypeEnum.WARN.getCode());
+		eventWarn.setType(EventTypeEnum.NORMAL_EVENT.getCode());
+		eventWarn.setTo(to);
 		eventWarn.setTitle(formattingTuple.getMessage());
 		eventWarn.setContent(ExceptionUtil.getExceptionMsg(formattingTuple.getThrowable()));
 		eventWarn.setOrigTime(LocalDateTime.now());
 		eventWarn.setCount(1);
 		return eventWarn;
 	}
+
 	/**
 	 * 校验配置
 	 *

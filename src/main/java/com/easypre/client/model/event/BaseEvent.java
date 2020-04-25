@@ -10,6 +10,8 @@ import java.time.LocalDateTime;
 public abstract class BaseEvent implements Event {
 	/** 事件类型 */
 	private Integer type;
+	/** 接收人 */
+	private String to;
 	/** 原始时间 */
 	private LocalDateTime origTime;
 	/** 签名 */
@@ -23,6 +25,14 @@ public abstract class BaseEvent implements Event {
 
 	public void setType(Integer type) {
 		this.type = type;
+	}
+
+	public String getTo() {
+		return to;
+	}
+
+	public void setTo(String to) {
+		this.to = to;
 	}
 
 	public LocalDateTime getOrigTime() {
@@ -54,6 +64,7 @@ public abstract class BaseEvent implements Event {
 	public String toString() {
 		return "BaseEvent{" +
 				"type=" + type +
+				", to='" + to + '\'' +
 				", origTime=" + origTime +
 				", sign='" + sign + '\'' +
 				", count=" + count +

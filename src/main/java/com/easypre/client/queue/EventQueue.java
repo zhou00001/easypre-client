@@ -43,7 +43,7 @@ public class EventQueue {
 		for (Map.Entry<String, List<BaseEvent>> entry : eventMap.entrySet()) {
 			if (entry.getValue() != null
 					&& entry.getValue().size() > 0
-					&& EventTypeEnum.WARN.getCode().equals(entry.getValue().get(0).getType())) {
+					&& EventTypeEnum.NORMAL_EVENT.getCode().equals(entry.getValue().get(0).getType())) {
 				// 预警，进行合并处理
 				BaseEvent baseEvent = entry.getValue().get(0);
 				baseEvent.setCount(entry.getValue().size());
