@@ -22,11 +22,12 @@ public class EasyPreTest {
 
 	@Test
 	public void warn() throws InterruptedException {
-
-//		while (true) {
-		EasyPre.eventTag("test", "测试:{}", LocalDate.now().toString(), new RuntimeException("测试异常"));
-		TimeUnit.MILLISECONDS.sleep(200);
-//		}
+		int i=10;
+		while (i>0) {
+			EasyPre.eventTag("test", "测试:{}", LocalDate.now().toString(), new RuntimeException("测试异常"));
+			i--;
+		}
+		TimeUnit.SECONDS.sleep(20);
 	}
 
 	@Test
@@ -35,7 +36,7 @@ public class EasyPreTest {
 //		EasyPre.eventTag("email", "测试:{}", LocalDate.now().toString(), new RuntimeException("测试异常"));
 		Map<String, Object> map = Maps.newHashMap();
 		map.put("name", "zhou");
-		EasyPre.eventTemplate("email",null, map);
+		EasyPre.eventTemplate("email", null, map);
 		TimeUnit.SECONDS.sleep(10);
 	}
 
@@ -46,7 +47,7 @@ public class EasyPreTest {
 		params.put("name", "张三");
 		params.put("code", "232322");
 		params.put("miniute", 5);
-		EasyPre.eventTemplate("template","zhou00001@126.com", params);
+		EasyPre.eventTemplate("template", "zhou00001@126.com", params);
 		TimeUnit.SECONDS.sleep(10);
 //		}
 	}
@@ -57,7 +58,7 @@ public class EasyPreTest {
 		params.put("name", "张三");
 		params.put("code", "232322");
 		params.put("miniute", 5);
-		EasyPre.eventTemplate("email","zhou00001@126.com", params);
+		EasyPre.eventTemplate("email", "zhou00001@126.com", params);
 		TimeUnit.SECONDS.sleep(10);
 	}
 }
