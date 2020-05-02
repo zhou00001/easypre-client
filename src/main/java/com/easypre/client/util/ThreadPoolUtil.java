@@ -49,7 +49,7 @@ public class ThreadPoolUtil {
 	/**
 	 * 默认线程池统一执行，默认线程池大小：
 	 *
-	 * @param runnable
+	 * @param runnable 线程任务
 	 */
 	public static void execute(Runnable runnable) {
 		execute(GLOBAL_POOL_NAME, runnable, GLOBAL_CORE_POOL_SIZE, GLOBAL_MAX_POOL_SIZE);
@@ -58,7 +58,7 @@ public class ThreadPoolUtil {
 	/**
 	 * 默认线程池统一执行，默认线程池大小：
 	 *
-	 * @param runnable
+	 * @param runnable 线程任务
 	 */
 	public static void execute(String name, Runnable runnable) {
 		execute(name, runnable, DEFAULT_CORE_POOL_SIZE, DEFAULT_MAX_POOL_SIZE);
@@ -67,10 +67,10 @@ public class ThreadPoolUtil {
 	/**
 	 * 从线程池运行
 	 *
-	 * @param name
-	 * @param runnable
-	 * @param corePoolSize
-	 * @param maxPoolSize
+	 * @param name         线程池名称
+	 * @param runnable     线程任务
+	 * @param corePoolSize 核心池大小
+	 * @param maxPoolSize  最大线程池大小
 	 */
 	public static void execute(String name, Runnable runnable, Integer corePoolSize, Integer maxPoolSize) {
 		ThreadPoolExecutor poolExecutor = buildThreadPoolExecutor(name, corePoolSize, maxPoolSize);
@@ -89,9 +89,9 @@ public class ThreadPoolUtil {
 	/**
 	 * 构建线程池
 	 *
-	 * @param name
-	 * @param corePoolSize
-	 * @param maxPoolSize
+	 * @param name         线程池名称
+	 * @param corePoolSize 核心线程池大小
+	 * @param maxPoolSize  最大线程池大小
 	 * @return
 	 */
 	public static ThreadPoolExecutor buildThreadPoolExecutor(String name, Integer corePoolSize, Integer maxPoolSize) {
@@ -127,7 +127,7 @@ public class ThreadPoolUtil {
 	/**
 	 * 获取线程工厂类
 	 *
-	 * @param name
+	 * @param name 线程池名称
 	 * @return
 	 */
 	public static ThreadFactory getThreadFactory(String name) {

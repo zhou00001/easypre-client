@@ -8,7 +8,7 @@ package com.easypre.client.model.event;
 public interface Event {
 	/**
 	 * 获取签名
-	 * @return
+	 * @return	返回签名后的字符串
 	 */
 	String getSign();
 }
