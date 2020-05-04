@@ -58,6 +58,7 @@ public class ThreadPoolUtil {
 	/**
 	 * 默认线程池统一执行，默认线程池大小：
 	 *
+	 * @param name     线程池名称
 	 * @param runnable 线程任务
 	 */
 	public static void execute(String name, Runnable runnable) {

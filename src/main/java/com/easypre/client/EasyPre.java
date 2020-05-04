@@ -54,7 +54,7 @@ public class EasyPre {
 	 * @param params 模板参数
 	 */
 	public static void eventTemplate(String tag, Map<String, Object> params) {
-		event(tag,null,params);
+		eventTemplate(tag,null,params);
 	}
 	/**
 	 * 模板事件

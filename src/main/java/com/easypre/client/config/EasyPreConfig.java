@@ -8,30 +8,65 @@ import org.apache.commons.lang3.StringUtils;
  * @since 1.0
  */
 public class EasyPreConfig {
-	/** 服务接收地址 */
+	private static final String EASYPRE_URL = "http://api.easypre.com/api/open/easypre/event";
+	/**
+	 * 服务接收地址
+	 */
 	private String server;
-	/** 当前环境 */
+	/**
+	 * 当前环境
+	 */
 	private String env;
-	/** 应用key */
+	/**
+	 * 应用key
+	 */
 	private String appKey;
-	/** 应用密钥 */
+	/**
+	 * 应用密钥
+	 */
 	private String secret;
-	/** 重试次数 */
+	/**
+	 * 重试次数
+	 */
 	private Integer retries;
-	/** 每次批量发送数量 */
+	/**
+	 * 每次批量发送数量
+	 */
 	private Integer batchSize;
-	/** 延迟发送时长（ms） */
+	/**
+	 * 延迟发送时长（ms）
+	 */
 	private Integer lingerMs;
-	/** 代理发送ip */
+	/**
+	 * 代理发送ip
+	 */
 	private String proxyIp;
-	/** 代理发送端口 */
+	/**
+	 * 代理发送端口
+	 */
 	private Integer proxyPort;
 
-	public EasyPreConfig() {
+	/**
+	 * 构造函数
+	 *
+	 * @param env    环境
+	 * @param appKey appKey
+	 * @param secret 应用密钥
+	 */
+	public EasyPreConfig(String env, String appKey, String secret) {
+		this(null,env,appKey,secret);
 	}
 
+	/**
+	 * 构造函数
+	 *
+	 * @param server 服务器接口地址
+	 * @param env    环境
+	 * @param appKey appKey
+	 * @param secret 应用密钥
+	 */
 	public EasyPreConfig(String server, String env, String appKey, String secret) {
-		this.server = server;
+		this.server = StringUtils.isNotBlank(server) ? server : EASYPRE_URL;
 		this.env = env;
 		this.appKey = appKey;
 		this.secret = secret;
@@ -39,10 +74,11 @@ public class EasyPreConfig {
 
 	/**
 	 * 检查配置是否完整
+	 *
 	 * @return
 	 */
-	public boolean isConfigAll(){
-		return !StringUtils.isAnyBlank(server,env,appKey,secret);
+	public boolean isConfigAll() {
+		return !StringUtils.isAnyBlank(server, env, appKey, secret);
 	}
 
 	public String getServer() {
