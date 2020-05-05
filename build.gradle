@@ -9,7 +9,7 @@ targetCompatibility = 1.8
 
 group = "com.easypre"
 archivesBaseName = "easypre-client"
-version = "1.0.1-SNAPSHOT"
+version = "1.0.2"
 description = "This is EasyPre Client!"
 
 repositories{
