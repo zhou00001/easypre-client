@@ -11,6 +11,7 @@ import com.easypre.client.send.EasyPreTimer;
 import com.easypre.client.util.ExceptionUtil;
 import com.easypre.client.util.JsonUtil;
 import com.google.common.base.Preconditions;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.helpers.FormattingTuple;
@@ -47,6 +48,7 @@ public class EasyPre {
 		EasyPre.config = config;
 		EasyPreTimer.init(config);
 	}
+
 	/**
 	 * 模板事件
 	 *
@@ -54,8 +56,9 @@ public class EasyPre {
 	 * @param params 模板参数
 	 */
 	public static void eventTemplate(String tag, Map<String, Object> params) {
-		eventTemplate(tag,null,params);
+		eventTemplate(tag, null, params);
 	}
+
 	/**
 	 * 模板事件
 	 *
@@ -70,6 +73,7 @@ public class EasyPre {
 		BaseEvent event = buildEvent(tag, to, params);
 		EventQueue.queue(event);
 	}
+
 	/**
 	 * 普通事件
 	 *
@@ -77,9 +81,10 @@ public class EasyPre {
 	 * @param content 内容
 	 * @param params  参数
 	 */
-	public static void eventTag(String tag, String content, final Object... params){
-		eventTag(tag,null,content,params);
+	public static void eventTag(String tag, String content, final Object... params) {
+		eventTag(tag, null, content, params);
 	}
+
 	/**
 	 * 普通事件
 	 *
@@ -89,10 +94,23 @@ public class EasyPre {
 	 * @param params  参数
 	 */
 	public static void eventTag(String tag, String to, String content, final Object... params) {
+		eventTag(tag, to, null, content, params);
+	}
+
+	/**
+	 * 普通事件
+	 *
+	 * @param tag     标签
+	 * @param to      接收人
+	 * @param title   标题
+	 * @param content 内容
+	 * @param params  参数
+	 */
+	public static void eventTag(String tag, String to, String title, String content, final Object... params) {
 		if (!checkConfig()) {
 			throw new EasyPreException("EasyPre尚未配置，请检查");
 		}
-		BaseEvent event = buildEvent(tag, to, content, params);
+		BaseEvent event = buildEvent(tag, to, title, content, params);
 		EventQueue.queue(event);
 	}
 
@@ -109,8 +127,8 @@ public class EasyPre {
 	/**
 	 * 构建模板事件
 	 *
-	 * @param tag
-	 * @param params
+	 * @param tag    标签
+	 * @param params 参数
 	 * @return
 	 */
 	private static BaseEvent buildEvent(String tag, String to, Map<String, Object> params) {
@@ -127,19 +145,21 @@ public class EasyPre {
 	/**
 	 * 构建普通事件
 	 *
-	 * @param tag
-	 * @param content
-	 * @param params
+	 * @param tag     标签
+	 * @param title   标题
+	 * @param content 内容
+	 * @param params  内容参数
 	 * @return
 	 */
-	private static BaseEvent buildEvent(String tag, String to, String content, final Object... params) {
+	private static BaseEvent buildEvent(String tag, String to, String title, String content, final Object... params) {
 		FormattingTuple formattingTuple = MessageFormatter.arrayFormat(content, params);
 		NormalEvent eventWarn = new NormalEvent();
 		eventWarn.setSign(tag);
 		eventWarn.setType(EventTypeEnum.NORMAL_EVENT.getCode());
 		eventWarn.setTo(to);
-		eventWarn.setTitle(formattingTuple.getMessage());
-		eventWarn.setContent(ExceptionUtil.getExceptionMsg(formattingTuple.getThrowable()));
+		eventWarn.setTitle(StringUtils.isBlank(title) ? formattingTuple.getMessage() : title);
+		eventWarn.setContent(String.format("%s%s", formattingTuple.getMessage()
+				, formattingTuple.getThrowable() != null ? "," + ExceptionUtil.getExceptionMsg(formattingTuple.getThrowable()) : ""));
 		eventWarn.setOrigTime(LocalDateTime.now());
 		eventWarn.setCount(1);
 		return eventWarn;
