@@ -1,2 +1,2 @@
-# easypre-client
-This is EasyPre's client!
+# 使用方法
+请移步 https://easypre.com/help/easypre/start 查看
