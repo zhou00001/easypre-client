@@ -158,8 +158,12 @@ public class EasyPre {
 		eventWarn.setType(EventTypeEnum.NORMAL_EVENT.getCode());
 		eventWarn.setTo(to);
 		eventWarn.setTitle(StringUtils.isBlank(title) ? formattingTuple.getMessage() : title);
-		eventWarn.setContent(String.format("%s%s", formattingTuple.getMessage()
-				, formattingTuple.getThrowable() != null ? "," + ExceptionUtil.getExceptionMsg(formattingTuple.getThrowable()) : ""));
+		if (StringUtils.isNotBlank(title)){
+			eventWarn.setContent(String.format("%s%s", formattingTuple.getMessage()
+					, formattingTuple.getThrowable() != null ? "," + ExceptionUtil.getExceptionMsg(formattingTuple.getThrowable()) : ""));
+		}else{
+			eventWarn.setContent(String.format("%s", formattingTuple.getThrowable() != null ? ExceptionUtil.getExceptionMsg(formattingTuple.getThrowable()) : ""));
+		}
 		eventWarn.setOrigTime(LocalDateTime.now());
 		eventWarn.setCount(1);
 		return eventWarn;

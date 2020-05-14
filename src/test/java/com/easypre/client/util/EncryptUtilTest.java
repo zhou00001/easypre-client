@@ -42,6 +42,14 @@ public class EncryptUtilTest {
 		countDownLatch.await();
 		System.out.println("结束，耗时："+(System.currentTimeMillis()-now)+" ms");
 	}
+	@Test
+	public void sign(){
+		String timestamp=String.valueOf(System.currentTimeMillis());
+		String secret="123456";
+		System.out.println("timestamp:"+timestamp);
+		System.out.println("appSecret:"+secret);
+		System.out.println("sign:"+EncryptUtil.encryptPassword(timestamp,secret));
+	}
 	private String buildStr(){
 		String str="";
 		for (int i=0;i<10;i++){

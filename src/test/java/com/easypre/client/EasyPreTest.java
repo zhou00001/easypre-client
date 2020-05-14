@@ -22,12 +22,20 @@ public class EasyPreTest {
 
 	@Test
 	public void warn() throws InterruptedException {
-		int i=10;
-		while (i>0) {
+		int i = 10;
+		while (i > 0) {
 			EasyPre.eventTag("test", "测试:{}", LocalDate.now().toString(), new RuntimeException("测试异常"));
 			i--;
 		}
 		TimeUnit.SECONDS.sleep(20);
+	}
+
+	@Test
+	public void event() throws InterruptedException {
+
+		EasyPre.event("测试:{}", LocalDate.now().toString(), new RuntimeException("测试异常"));
+
+		TimeUnit.SECONDS.sleep(10);
 	}
 
 	@Test
