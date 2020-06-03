@@ -11,9 +11,18 @@ easypre-client
 ```
 
 请移步 https://easypre.com/help/easypre/start 查看
+
 **Features**
+- 应用监控
+ - 秒级推送消息，及时感知
+ - 应用消息推送
+ - 灵活配置推送方式
+ - 支持钉钉机器人、企业微信机器人、邮件方式推送
+ - 秒级推送消息，及时感知
+ 
 **Usage Examples**
 **construct**
+
 无代理模式
 ```Java
 // appKey和appSecret需登录EasyPre.com后，在【控制台】-【我的应用】- 【设置】-【应用信息】查看获取。
@@ -31,6 +40,7 @@ EasyPre.init(easyPreConfig);
 '''
 
 **useage**
+
 tag template
 ```Java
 Map<String,Object> params=Maps.newHashMap();
